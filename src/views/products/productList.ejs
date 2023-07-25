@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+    <%- include('../partials/header')  %>
+    <div class="container-fluid">
+        <div class="seccion-titulos">
+            <h2>Listado de Productos</h2>
+        </div>
+        <hr>
+        <div class="row col-12 justify-content-center">
+        <% products.forEach(function(producto){ %>
+                <div class="card productos" style="width: 15rem;">
+                    <% if(locals.isLogged && locals.userLogged.role_id === 1) { %>
+                    <div class="float-start">
+                        <i class="fas fa-edit"></i>
+                        <i class="fas fa-plus-square"></i>
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <% } %>
+                    <img src="/img/products/<%= producto.image %>" class="card-img-top" alt="<%= producto.product %>">
+                    <div class="card-body">
+                    <p class="card-title"><%= producto.product %></p>
+                    <p class="card-text">$ <%= producto.price %></p>
+                    <div class="row text-center">
+                        <div class="col">
+                            <a href="/products/detail/<%= producto.id %>">Ver más</a>
+                        </div>
+                        <div class="col">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+        <% }) %>
+    </div>
+    <hr>
+    <%- include('../partials/footer')  %>
+    <%- include('../partials/bs')  %>
+</body>
+</html>

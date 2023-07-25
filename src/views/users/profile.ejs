@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+    <%- include('../partials/header') %>
+    <main class="container-fluid">
+        <div class="seccion-titulos">
+            <h2>Mi Perfil</h2>
+        </div>
+        <hr>
+        <div class="container-fluid">
+            <div class="card usuarios-card">
+                <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="/img/avatars/<%= user.avatar %>" class="img-fluid rounded-start usuarios-imagen" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title usuarios-text">Nombre: <%= user.name %></h5>
+                        <h5 class="card-title usuarios-text">Apellido: <%= user.surname %></h5>
+                        <h5 class="card-title usuarios-text">Email: <%= user.email %></h5></span>
+                        <h5 class="card-title usuarios-text">Teléfono: <%= user.phone %></h5>
+                        <h5 class="card-title usuarios-text">Dirección: <%= user.address %></h5>
+                        <h5 class="card-title usuarios-text">Código Postal: <%= user.code %></h5>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="producto-detalle-caracteristicas-botones">
+            <button type="submit" class="btn btn-primary"><a href="/users/logout">Cerrar Sesión</a></button>
+            <% if(user.role_id === 1) { %>
+            <button type="submit" class="btn btn-primary"><a href="/admin/adminProducts/">Administrar Productos</a></button>
+            <button type="submit" class="btn btn-primary"><a href="/admin/adminUsers/">Administrar Usuarios</a></button>
+            <% } %>
+        </div>
+    </main>
+    <hr>
+    <%- include('../partials/bs')  %>
+    <%- include('../partials/footer')  %>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+    <%- include('../partials/header') %>
+    <main class="container-fluid">
+        <div class="seccion-titulos">
+            <h2>Detalle del Producto</h2>
+        </div>
+        <hr>
+        <div class="container-fluid">
+            <div class="card productos-card">
+            <div class="row g-0">
+                <div class="col-sm-4">
+                    <img src="/img/products/<%= product.image %>" alt="" class="imagen">
+                </div>
+                <div class="col-sm-8">
+                    <h4 class="productos-text"><%= product.product %></h4>
+                    <h5 class="productos-text">* * * * * 5 opiniones</h5>
+                    <h4 class="productos-text">$ <%= product.price %></h4>
+                    <h4 class="productos-text">Descripción</h4>
+                    <h5 class="productos-text"><%= product.description %></h5>
+                    <h4 class="productos-text">Categoría: <%= product.categories.category %></h4>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="container text-center">
+            <% if(locals.isLogged && locals.userLogged.role_id === 1) { %>
+                <button type="submit" class="btn btn-primary"><a href="/products/edit/<%= product.id %>">Editar</a></button>
+                <button type="submit" class="btn btn-primary"><a href="/products/create">Agregar</a></button>
+                <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Borrar
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminación de producto</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Está seguro de eliminar el producto?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary"><a href="/products/delete/<%= product.id %>">Borrar</a></button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% } else{ %>
+                <div class="row justify-content-center">
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary">Comentar</button>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+        <hr>
+        <div class="container-fluid">
+            <div class="seccion-titulos">
+                <h2>Productos similares</h2>
+            </div>
+            <div class="row col-12 justify-content-center">
+                <% products.forEach(function(similarProduct){
+                    if(similarProduct.categories.category === product.categories.category && similarProduct.id != product.id){ %>
+                    <div class="card productos" style="width: 15rem;">
+                        <img src="/img/products/<%= similarProduct.image %>" class="card-img-top" alt="<%= similarProduct.product %>">
+                        <div class="card-body">
+                        <p class="card-title"><%= similarProduct.product %></p>
+                        <p class="card-text">$ <%= similarProduct.price %></p>
+                        <a href="/products/detail/<%= similarProduct.id %>">Ver más</a>
+                        <i class="fas fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                <% }}) %>
+            </div>
+        </div>
+        <hr>
+        <h2>Comentarios</h2>
+        <div class="productos-comentarios">
+            <div class="productos-comentarios-logo">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="productos-comentarios-usuario">
+                <h2>Marcela</h2>
+                <h3>31 de mayo 2023</h3>
+                <h3>*****</h3>
+            </div>
+            <div class="productos-comentarios-comentario">
+                <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque veritatis non ad sed modi ipsum cum exercitationem reprehenderit quae voluptatibus, adipisci quos praesentium unde quibusdam ipsa placeat, saepe aliquam perspiciatis.</h3>
+            </div>
+        </div>
+        <div class="productos-comentarios">
+            <div class="productos-comentarios-logo">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="productos-comentarios-usuario">
+                <h2>Silvia</h2>
+                <h3>29 de mayo 2023</h3>
+                <h3>*****</h3>
+            </div>
+            <div class="productos-comentarios-comentario">
+                <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque veritatis non ad sed modi ipsum cum exercitationem reprehenderit quae voluptatibus, adipisci quos praesentium unde quibusdam ipsa placeat, saepe aliquam perspiciatis.</h3>
+            </div>
+        </div>
+        <div class="productos-comentarios">
+            <div class="productos-comentarios-logo">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="productos-comentarios-usuario">
+                <h2>Kely</h2>
+                <h3>15 de mayo 2023</h3>
+                <h3>*****</h3>
+            </div>
+            <div class="productos-comentarios-comentario">
+                <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque veritatis non ad sed modi ipsum cum exercitationem reprehenderit quae voluptatibus, adipisci quos praesentium unde quibusdam ipsa placeat, saepe aliquam perspiciatis.</h3>
+            </div>
+        </div>
+    </main>
+    <hr>
+    <%- include('../partials/bs')  %>
+    <%- include('../partials/footer')  %>
+</body>
+</html>

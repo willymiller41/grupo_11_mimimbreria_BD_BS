@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+    <%- include('../partials/header')  %>
+    <main class="container-fluid">
+        <div class="seccion-titulos">
+            <h2>Login de Usuarios</h2>
+        </div>
+        <hr>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <form action="/users/login" method="post">
+                    <% if(locals.errors && errors.email){ %>
+                        <div class="error-msg"><%= errors.email.msg %></div> 
+                    <% } %>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Email: </span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="email" value="<%= locals.oldData ? oldData.email : null  %>">
+                    </div>
+                    <% if(locals.errors && errors.password){ %>
+                        <div class="error-msg"><%= errors.password.msg %></div> 
+                    <% } %>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Contraseña: </span>
+                        <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="password">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-10">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="recordarPassword" name="recordarPassword">
+                            <label class="form-check-label" for="recordarPassword" >
+                              Recordar contraseña
+                            </label>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 text-center">
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary">Ingresar</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-primary"><a href="/users/register">Crear Cuenta</a></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <hr>
+    <%- include('../partials/bs')  %>
+    <%- include('../partials/footer')  %>
+</body>
+</html>

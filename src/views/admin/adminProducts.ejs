@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %> 
+<body>
+    <%- include('../partials/header')  %>
+    <main class="container-fluid">
+        <div class="seccion-titulos">
+            <h2>Administración de Productos</h2>
+        </div>
+        <hr>
+        <div class="container text-center">
+            <div class="row justify-content-end">
+                <div class="col-2">
+                    <a href="/products/create">
+                        <button type="submit" class="btn btn-success">Agregar Producto</button>
+                    </a>
+                </div>
+                <div class="col-2">
+                    <a href="/admin/adminUsers">
+                        <button type="submit" class="btn btn-success">Administrar Usuarios</button>
+                    </a>
+                </div>
+            </div>
+            <table class="table table-success table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% products.forEach(function(product){ %>
+                        <tr>
+                            <th scope="row"><%= product.id %></th>
+                            <td><img src="/img/products/<%= product.image  %>" alt="<%= product.product %>" class="img-thumbnail"></td>
+                            <td><%= product.product %></td>
+                            <td><%= product.description %></td>
+                            <td>                                
+                                <a href="/products/edit/<%= product.id %>">
+                                    <button type="submit" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/products/delete/<%= product.id %>">
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                </a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </main>
+    <hr>
+    <footer>
+        <%- include('../partials/bs'); %>
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+</html>
