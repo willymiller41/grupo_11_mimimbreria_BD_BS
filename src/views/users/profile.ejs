@@ -28,10 +28,11 @@
             </div>
         </div>
         <div class="producto-detalle-caracteristicas-botones">
-            <button type="submit" class="btn btn-primary"><a href="/users/logout">Cerrar Sesión</a></button>
+            <button type="submit" class="btn btn-primary"><a href="/users/edit/<%= user.id %>">Editar datos</a></button>
+            <button type="submit" class="btn btn-primary"><a href="/users/logout">Cerrar sesión</a></button>
             <% if(user.role_id === 1) { %>
-            <button type="submit" class="btn btn-primary"><a href="/admin/adminProducts/">Administrar Productos</a></button>
-            <button type="submit" class="btn btn-primary"><a href="/admin/adminUsers/">Administrar Usuarios</a></button>
+            <button type="submit" class="btn btn-primary"><a href="/admin/adminProducts/">Productos</a></button>
+            <button type="submit" class="btn btn-primary"><a href="/admin/adminUsers/">Usuarios</a></button>
             <% } %>
         </div>
     </main>

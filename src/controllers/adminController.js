@@ -16,16 +16,15 @@ module.exports = {
       })
 	},
 
-    userslist: (req, res) => {
-        db.Users.findAll(
-            {include: ['roles']})
-            .then((users)=>{
-                db.Roles.findAll()
-            .then((roles)=>{
-              res.render(path.join(__dirname, "../views/admin/adminUsers"), {users, roles})
-            })
-          })
-        },
+  userslist: (req, res) => {
+    db.Users.findAll({include: ['roles']})
+    .then((users)=>{
+      db.Roles.findAll()
+      .then((roles)=>{
+        res.render(path.join(__dirname, "../views/admin/adminUsers"), {users, roles})
+      })
+    })
+  },
 
   listCategory: (req, res) => {
     db.Products.findAll(

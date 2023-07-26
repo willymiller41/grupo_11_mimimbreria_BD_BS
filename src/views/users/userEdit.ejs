@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+    <%- include('../partials/header')  %>
+    <main class="container-fluid">
+        <div class="seccion-titulos">
+            <h2>Edición de Usuario</h2>
+        </div>
+        <hr>
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <form action="/users/edit/<%= user.id %>" method="post" class="register-form" enctype="multipart/form-data">
+                    <% if(locals.errors && errors.name){ %>
+                        <div class="error-msg"><%= errors.name.msg %></div> 
+                    <% } %>
+                    <div class="input-group">
+                        <span class="input-group-text">Nombre: </span>
+                        <input type="text" aria-label="name" class="form-control" name="name" value="<%= user.name  %>">
+                    </div>
+                    <% if(locals.errors && errors.surname){ %>
+                        <div class="error-msg"><%= errors.surname.msg %></div> 
+                    <% } %>
+                    <div class="input-group">
+                        <span class="input-group-text">Apellido: </span>
+                        <input type="text" aria-label="surname" class="form-control" name="surname" value="<%= user.surname  %>">
+                    </div>
+                    <% if(locals.errors && errors.email){ %>
+                        <div class="error-msg"><%= errors.email.msg %></div> 
+                    <% } %>
+                    <label class="visually-hidden" for="autoSizingInputGroup">Email</label>
+                    <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="email" class="form-control" id="autoSizingInputGroup" name="email" value="<%= user.email  %>">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Teléfono: </span>
+                        <input type="text" aria-label="phone" class="form-control" name="phone" value="<%= user.phone  %>">
+                    </div>
+                    <% if(locals.errors && errors.address){ %>
+                        <div class="error-msg"><%= errors.address.msg %></div> 
+                    <% } %>
+                    <div class="input-group">
+                        <span class="input-group-text">Domicilio: </span>
+                        <input type="text" aria-label="address" class="form-control" name="address" value="<%= user.address  %>">
+                    </div>
+                    <% if(locals.errors && errors.code){ %>
+                        <div class="error-msg"><%= errors.code.msg %></div> 
+                    <% } %>
+                    <div class="input-group">
+                        <span class="input-group-text">Código Postal: </span>
+                        <input type="text" aria-label="code" class="form-control" name="code" value="<%= user.code  %>">
+                    </div>
+                    <% if(locals.errors && errors.avatar){ %>
+                        <div class="error-msg"><%= errors.avatar.msg %></div> 
+                    <% } %>
+                    <div class="input-group">
+                        <label class="input-group-text" for="imagenActual">Imagen actual: </label>
+                        <img src="/img/avatars/<%= user.avatar %>" alt="<%= user.name %>" class="img-thumbnail">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group-text" for="inputGroupFile01">Imagen de perfil: </label>
+                        <input type="file" class="form-control" id="inputGroupFile01" name="avatar" value="<%= user.avatar %>">
+                    </div>
+                    <div class="row mb-3 text-center">
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-primary"><a href="/users/profile">Cancelar</a></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <hr>
+    <%- include('../partials/bs')  %>
+    <%- include('../partials/footer')  %>
+</body>
+</html>

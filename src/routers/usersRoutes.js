@@ -62,12 +62,8 @@ router.get("/register", guestMiddleware, usersController.register);
 router.post("/register", upload.single('avatar'), usersRegisterValidations, usersController.registerProcess);
 router.get("/profile", authMiddleware, usersController.profile);
 router.get("/logout", usersController.logout);
+router.get("/edit/:id", usersController.userEdit);
+router.post("/edit/:id", upload.single('avatar'), usersRegisterValidations, usersController.userEditProcess);
 
-/* router.get("/login", guestMiddleware, usersController.login);
-router.post("/login", usersLoginValidations, usersController.processLogin);
-router.get("/register", guestMiddleware, usersController.register);
-router.post("/register", upload.single('avatar'), usersRegisterValidations, usersController.processRegister);
-router.get("/profile", authMiddleware, usersController.profile);
-router.get("/logout", usersController.logout); */
 
 module.exports = router;

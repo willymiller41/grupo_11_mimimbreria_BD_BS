@@ -10,59 +10,56 @@
         <hr>
         <div class="container-fluid">
             <div class="card productos-card">
-            <div class="row g-0">
-                <div class="col-sm-4">
-                    <img src="/img/products/<%= product.image %>" alt="" class="imagen">
-                </div>
-                <div class="col-sm-8">
-                    <h4 class="productos-text"><%= product.product %></h4>
-                    <h5 class="productos-text">* * * * * 5 opiniones</h5>
-                    <h4 class="productos-text">$ <%= product.price %></h4>
-                    <h4 class="productos-text">Descripción</h4>
-                    <h5 class="productos-text"><%= product.description %></h5>
-                    <h4 class="productos-text">Categoría: <%= product.categories.category %></h4>
+                <% if(locals.isLogged){
+                    if(locals.userLogged.role_id === 1 || locals.userLogged.role_id === 2) { %>
+                        <div class="float-start">
+                            <a href="/products/create"><i class="fas fa-plus-square"></i></a>
+                            <a href="/products/edit/<%= product.id %>"><i class="fas fa-edit"></i></a>
+                            <!-- Button trigger modal -->
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminación de producto</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                        <h5>¿Está seguro de eliminar el producto?</h5>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary"><a href="/products/delete/<%= product.id %>">Borrar</a></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }} %>
+
+                <div class="row g-0">
+                    <div class="col-sm-4">
+                        <img src="/img/products/<%= product.image %>" alt="" class="imagen">
+                    </div>
+                    <div class="col-sm-7 float-start">
+                        <h4 class="productos-text"><%= product.product %></h4>
+                        <h4 class="productos-text">$ <%= product.price %></h4>
+                        <h4 class="productos-text">Descripción</h4>
+                        <h5 class="productos-text"><%= product.description %></h5>
+                        <h4 class="productos-text">Categoría: <%= product.categories.category %></h4>
+                    </div>
+                    <% if(locals.isLogged){
+                        if(locals.userLogged.role_id === 3) { %>
+                            <div class="col-sm-1">
+                                <a class="float-start" href="/products/create"><i class="fas fa-comment"></i></i></a>
+                                <a class="float-start" href="/products/edit/<%= product.id %>"><i class="fas fa-shopping-cart"></i></a>
+                            </div>
+                    <% }} %>
                 </div>
             </div>
-            </div>
-        </div>
-        <div class="container text-center">
-            <% if(locals.isLogged && locals.userLogged.role_id === 1) { %>
-                <button type="submit" class="btn btn-primary"><a href="/products/edit/<%= product.id %>">Editar</a></button>
-                <button type="submit" class="btn btn-primary"><a href="/products/create">Agregar</a></button>
-                <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Borrar
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminación de producto</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ¿Está seguro de eliminar el producto?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary"><a href="/products/delete/<%= product.id %>">Borrar</a></button>
-        </div>
-      </div>
-    </div>
-  </div>
-            <% } else{ %>
-                <div class="row justify-content-center">
-                    <div class="col-sm-2">
-                        <button type="submit" class="btn btn-primary">Comentar</button>
-                    </div>
-                    <div class="col-sm-2">
-                        <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
-                    </div>
-                </div>
-            <% } %>
-        </div>
         <hr>
         <div class="container-fluid">
             <div class="seccion-titulos">
