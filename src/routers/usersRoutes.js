@@ -62,7 +62,7 @@ router.get("/register", guestMiddleware, usersController.register);
 router.post("/register", upload.single('avatar'), usersRegisterValidations, usersController.registerProcess);
 router.get("/profile", authMiddleware, usersController.profile);
 router.get("/logout", usersController.logout);
-router.get("/edit/:id", usersController.userEdit);
+router.get("/edit/:id", authMiddleware, usersController.userEdit);
 router.post("/edit/:id", upload.single('avatar'), usersRegisterValidations, usersController.userEditProcess);
 
 

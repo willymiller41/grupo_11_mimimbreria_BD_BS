@@ -1,11 +1,12 @@
 const path = require('path');
 const {validationResult} = require("express-validator")
-const db = require('../database/models')
+const db = require('../database/models');
+const { Op } = require('sequelize');
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 module.exports = {
   //Home de productos
-  productslist: (req, res) => {
+  productsList: (req, res) => {
     db.Products.findAll(
         {include: ['categories']})
         .then((products)=>{
@@ -16,14 +17,39 @@ module.exports = {
       })
 	},
 
-  userslist: (req, res) => {
-    db.Users.findAll({include: ['roles']})
+  usersList: (req, res) => {
+    db.Users.findAll({include: ['roles'],
+    where: {
+      [Op.or]: [{role_id: 3}, {role_id: 2}]}})
     .then((users)=>{
       db.Roles.findAll()
       .then((roles)=>{
         res.render(path.join(__dirname, "../views/admin/adminUsers"), {users, roles})
       })
     })
+  },
+
+  usersEditRol: (req, res) => {
+    db.Users.findByPk(req.params.id, {include: ['roles']})
+    .then((user)=>{
+      db.Roles.findAll()
+      .then((roles)=>{
+      res.render(path.join(__dirname, "../views/admin/userEditRol"), {user, roles})
+      })
+    })
+  },
+
+  usersSaveRol: (req, res) =>{
+    db.Users.update({
+      role_id: req.body.newRole,
+    },{
+      where: {
+        id: req.params.id
+      }
+    })
+      .then((user)=>{
+        res.render(path.join(__dirname, "../views/admin/adminUsers"))
+      })
   },
 
   listCategory: (req, res) => {

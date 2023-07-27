@@ -9,24 +9,45 @@
         </div>
         <hr>
         <div class="row col-12 justify-content-center">
-        <% products.forEach(function(producto){ 
-            if(producto.order == 1){%>
+        <% products.forEach(function(product){ 
+            if(product.order == 1){%>
                 <div class="card productos" style="width: 15rem;">
                     <% if(locals.isLogged){
                         if(locals.userLogged.role_id === 1 || locals.userLogged.role_id === 2) { %>
-                    <div class="float-start">
-                        <i class="fas fa-edit"></i>
-                        <i class="fas fa-plus-square"></i>
-                        <i class="fas fa-trash"></i>
-                    </div>
-                    <% }} %>
-                    <img src="/img/products/<%= producto.image %>" class="card-img-top" alt="<%= producto.product %>">
+                            <div class="float-start">
+                                <a href="/products/create"><i class="fas fa-plus-square"></i></a>
+                                <a href="/products/edit/<%= product.id %>"><i class="fas fa-edit"></i></a>
+                                <!-- Button trigger modal -->
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminación de producto</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                            <h5>¿Está seguro de eliminar el producto?</h5>
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-primary"><a href="/products/delete/<%= product.id %>">Borrar</a></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }} %>
+                    <img src="/img/products/<%= product.image %>" class="card-img-top" alt="<%= product.product %>">
                     <div class="card-body">
-                    <p class="card-title"><%= producto.product %></p>
-                    <p class="card-text">$ <%= producto.price %></p>
+                    <p class="card-title"><%= product.product %></p>
+                    <p class="card-text">$ <%= product.price %></p>
                     <div class="row text-center">
                         <div class="col">
-                            <a href="/products/detail/<%= producto.id %>">Ver más</a>
+                            <a href="/products/detail/<%= product.id %>">Ver más</a>
                         </div>
                         <div class="col">
                             <i class="fas fa-shopping-cart"></i>

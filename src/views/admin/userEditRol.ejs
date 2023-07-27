@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+    <%- include('../partials/header')  %>
+    <main class="container-fluid">
+        <div class="seccion-titulos">
+            <h2>Edición Rol de Usuario</h2>
+        </div>
+        <hr>
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <form action="/admin/adminUsersEditRol/<%= user.id %>" method="post" class="register-form" enctype="multipart/form-data">
+                    <div class="input-group">
+                        <span class="input-group-text">Nombre: </span>
+                        <input type="text" aria-label="name" class="form-control" name="name" value="<%= user.name  %>" disabled>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Apellido: </span>
+                        <input type="text" aria-label="surname" class="form-control" name="surname" value="<%= user.surname  %>" disabled>
+                    </div>
+                    <label class="visually-hidden" for="autoSizingInputGroup">Email</label>
+                    <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="email" class="form-control" id="autoSizingInputGroup" name="email" value="<%= user.email  %>" disabled>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Teléfono: </span>
+                        <input type="text" aria-label="phone" class="form-control" name="phone" value="<%= user.phone  %>" disabled>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Domicilio: </span>
+                        <input type="text" aria-label="address" class="form-control" name="address" value="<%= user.address  %>" disabled>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Código Postal: </span>
+                        <input type="text" aria-label="code" class="form-control" name="code" value="<%= user.code  %>" disabled>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group-text" for="imagenActual">Avatar: </label>
+                        <img src="/img/avatars/<%= user.avatar %>" alt="<%= user.name %>" class="img-thumbnail" disabled>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group-text" for="inputGroupFile01">Rol actual: </label>
+                        <input type="text" class="form-control" id="inputGroupFile01" name="rol" value="<%= user.roles.role %>" disabled>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="newRole">Nuevo Rol: </label>
+                        <select class="form-select" id="newRole" name="newRole" value="<%= user.roles.role  %>">
+                        <option value="" selected>Elija el nuevo rol</option>
+                        <% for (const role of roles){ %>
+                            <option value="<%= role.id %>"><%= role.role %></option>
+                        <% } %>
+                        </select>
+                    </div>
+                    <div class="row mb-3 text-center">
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary">Cambiar rol</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-primary"><a href="/admin/adminUsers">Cancelar</a></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <hr>
+    <%- include('../partials/bs')  %>
+    <%- include('../partials/footer')  %>
+</body>
+</html>

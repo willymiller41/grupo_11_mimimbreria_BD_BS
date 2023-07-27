@@ -11,11 +11,6 @@
         <div class="container text-center">
             <div class="row justify-content-end">
                 <div class="col-2">
-                    <a href="/users/create">
-                        <button type="submit" class="btn btn-success">Agregar Usuario</button>
-                    </a>
-                </div>
-                <div class="col-2">
                     <a href="/admin/adminProducts">
                         <button type="submit" class="btn btn-success">Admin Productos</button>
                     </a>
@@ -43,10 +38,10 @@
                             <td><%= user.surname %></td>
                             <td><%= user.email %></td>
                             <td><%= user.roles.role %></td>
-                            <td>                                
-                                <a href="/users/edit/<%= user.id %>">
-                                    <button type="submit" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                                </a>
+                            <td>
+                                <a href="/admin/adminUsersEditRol/<%= user.id %>">
+                                    <button type="submit" class="btn btn-success"><i class="fas fa-edit"></i></i></button>
+                                </a>                      
                             </td>
                             <td>
                                 <a href="/users/userDelete/<%= user.id %>">
