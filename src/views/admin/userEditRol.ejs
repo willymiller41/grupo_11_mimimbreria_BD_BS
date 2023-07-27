@@ -10,7 +10,7 @@
         <hr>
         <div class="row justify-content-center">
             <div class="col-md-5">
-                <form action="/admin/adminUsersEditRol/<%= user.id %>" method="post" class="register-form" enctype="multipart/form-data">
+                <form action="/admin/adminUsersEditRol/<%= user.id %>" method="post" class="register-form">
                     <div class="input-group">
                         <span class="input-group-text">Nombre: </span>
                         <input type="text" aria-label="name" class="form-control" name="name" value="<%= user.name  %>" disabled>
@@ -41,21 +41,23 @@
                         <img src="/img/avatars/<%= user.avatar %>" alt="<%= user.name %>" class="img-thumbnail" disabled>
                     </div>
                     <div class="input-group">
-                        <label class="input-group-text" for="inputGroupFile01">Rol actual: </label>
-                        <input type="text" class="form-control" id="inputGroupFile01" name="rol" value="<%= user.roles.role %>" disabled>
+                        <label class="input-group-text" for="oldRole">Rol actual: </label>
+                        <input type="text" class="form-control" id="oldRole" name="oldRole" value="<%= user.roles.role %>" disabled>
                     </div>
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="newRole">Nuevo Rol: </label>
-                        <select class="form-select" id="newRole" name="newRole" value="<%= user.roles.role  %>">
-                        <option value="" selected>Elija el nuevo rol</option>
+                        <label class="input-group-text" for="role">Rol: </label>
+                        <select class="form-select" id="role" name="role">
+                        <option value="0" selected>Elija el nuevo rol: </option>
                         <% for (const role of roles){ %>
-                            <option value="<%= role.id %>"><%= role.role %></option>
+                            <option value="<%= role.id %>"
+                        ><%= role.role %>
+                        </option>
                         <% } %>
                         </select>
                     </div>
                     <div class="row mb-3 text-center">
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary">Cambiar rol</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                         <div class="col-md-6">
                             <button class="btn btn-primary"><a href="/admin/adminUsers">Cancelar</a></button>

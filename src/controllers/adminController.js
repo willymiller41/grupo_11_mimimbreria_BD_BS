@@ -1,5 +1,4 @@
 const path = require('path');
-const {validationResult} = require("express-validator")
 const db = require('../database/models');
 const { Op } = require('sequelize');
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -40,15 +39,23 @@ module.exports = {
   },
 
   usersSaveRol: (req, res) =>{
-    db.Users.update({
-      role_id: req.body.newRole,
-    },{
-      where: {
-        id: req.params.id
-      }
-    })
-      .then((user)=>{
-        res.render(path.join(__dirname, "../views/admin/adminUsers"))
+      db.Users.update({
+        role_id: req.body.role,
+      },{
+        where: {
+          id: req.params.id
+        }
+      })
+      .then(()=>{
+        db.Users.findAll({include: ['roles'],
+        where: {
+          [Op.or]: [{role_id: 3}, {role_id: 2}]}})
+        .then((users)=>{
+          db.Roles.findAll()
+          .then((roles)=>{
+            res.render(path.join(__dirname, "../views/admin/adminUsers"), {users, roles})
+          })
+        })
       })
   },
 

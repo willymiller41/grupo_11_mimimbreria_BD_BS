@@ -50,10 +50,18 @@
                         <h5 class="productos-text"><%= product.description %></h5>
                         <h4 class="productos-text">Categoría: <%= product.categories.category %></h4>
                     </div>
-                    <div class="col-sm-1">
-                        <a class="float-start" href="#"><i class="fas fa-comment"></i></i></a>
-                        <a class="float-start" href="#"><i class="fas fa-shopping-cart"></i></a>
-                    </div>
+                    <% if(locals.isLogged){
+                        if(locals.userLogged.role_id === 3) { %>
+                            <div class="col-sm-1">
+                                <a class="float-start" href="#"><i class="fas fa-comment"></i></i></a>
+                                <a class="float-start" href="#"><i class="fas fa-shopping-cart"></i></a>
+                            </div>
+                    <% }}else{ %>
+                            <div class="col-sm-1">
+                                <a class="float-start" href="#"><i class="fas fa-comment"></i></i></a>
+                                <a class="float-start" href="#"><i class="fas fa-shopping-cart"></i></a>
+                            </div>
+                    <% } %>
                 </div>
             </div>
         <hr>
@@ -65,7 +73,7 @@
                 <% products.forEach(function(similarProduct){
                     if(similarProduct.categories.category === product.categories.category && similarProduct.id != product.id){ %>
                     <div class="card productos" style="width: 15rem;">
-                        <img src="/img/products/<%= similarProduct.image %>" class="card-img-top" alt="<%= similarProduct.product %>">
+                        <a href="/products/detail/<%= similarProduct.id %>"><img src="/img/products/<%= similarProduct.image %>" class="card-img-top" alt="<%= similarProduct.product %>"></a>
                         <div class="card-body">
                         <p class="card-title"><%= similarProduct.product %></p>
                         <p class="card-text">$ <%= similarProduct.price %></p>

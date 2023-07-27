@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                         <% }} %>
-                    <img src="/img/products/<%= product.image %>" class="card-img-top" alt="<%= product.product %>">
+                    <a href="/products/detail/<%= product.id %>"><img src="/img/products/<%= product.image %>" class="card-img-top" alt="<%= product.product %>"></a>
                     <div class="card-body">
                     <p class="card-title"><%= product.product %></p>
                     <p class="card-text">$ <%= product.price %></p>

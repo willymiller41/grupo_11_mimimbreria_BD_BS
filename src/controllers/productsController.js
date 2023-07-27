@@ -129,7 +129,6 @@ module.exports = {
         }
       })
         .then((producto)=>{
-          console.log(producto);
           res.render(path.join(__dirname, "../views/products/productsSearch"), {producto, toThousand})
         })
     }else{
