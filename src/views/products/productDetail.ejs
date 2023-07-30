@@ -77,52 +77,36 @@
                         <div class="card-body">
                         <p class="card-title"><%= similarProduct.product %></p>
                         <p class="card-text">$ <%= similarProduct.price %></p>
-                        <a href="/products/detail/<%= similarProduct.id %>">Ver más</a>
-                        <i class="fas fa-shopping-cart"></i>
+                        <div class="row text-center">
+                            <div class="col">
+                                <a href="/products/detail/<%= product.id %>">Ver más</a>
+                            </div>
+                            <div class="col">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 <% }}) %>
             </div>
         </div>
         <hr>
-        <h2>Comentarios</h2>
-        <div class="productos-comentarios">
-            <div class="productos-comentarios-logo">
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="productos-comentarios-usuario">
-                <h2>Marcela</h2>
-                <h3>31 de mayo 2023</h3>
-                <h3>*****</h3>
-            </div>
-            <div class="productos-comentarios-comentario">
-                <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque veritatis non ad sed modi ipsum cum exercitationem reprehenderit quae voluptatibus, adipisci quos praesentium unde quibusdam ipsa placeat, saepe aliquam perspiciatis.</h3>
-            </div>
-        </div>
-        <div class="productos-comentarios">
-            <div class="productos-comentarios-logo">
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="productos-comentarios-usuario">
-                <h2>Silvia</h2>
-                <h3>29 de mayo 2023</h3>
-                <h3>*****</h3>
-            </div>
-            <div class="productos-comentarios-comentario">
-                <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque veritatis non ad sed modi ipsum cum exercitationem reprehenderit quae voluptatibus, adipisci quos praesentium unde quibusdam ipsa placeat, saepe aliquam perspiciatis.</h3>
-            </div>
-        </div>
-        <div class="productos-comentarios">
-            <div class="productos-comentarios-logo">
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="productos-comentarios-usuario">
-                <h2>Kely</h2>
-                <h3>15 de mayo 2023</h3>
-                <h3>*****</h3>
-            </div>
-            <div class="productos-comentarios-comentario">
-                <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque veritatis non ad sed modi ipsum cum exercitationem reprehenderit quae voluptatibus, adipisci quos praesentium unde quibusdam ipsa placeat, saepe aliquam perspiciatis.</h3>
+        
+        <div class="container">
+            <div class="row col-12 justify-content-center">
+                <h2>Comentarios</h2>
+                <hr>
+                <div class="row col-sm-4">
+                    <div class="col">
+                        <a class="usuarios" href="#"><i class="fas fa-user"></i></a>
+                        <h4>Marcela</h4>
+                        <h5>31 de mayo 2023</h5>
+                        <h5>*****</h5>
+                    </div>
+                </div>
+                <div class="row col-sm-6">
+                    <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque veritatis non ad sed modi ipsum cum exercitationem reprehenderit quae voluptatibus, adipisci quos praesentium unde quibusdam ipsa placeat, saepe aliquam perspiciatis.</h5>
+                </div>
             </div>
         </div>
     </main>

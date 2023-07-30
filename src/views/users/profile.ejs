@@ -11,10 +11,10 @@
         <div class="container-fluid">
             <div class="card usuarios-card">
                 <div class="row g-0">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <img src="/img/avatars/<%= user.avatar %>" class="img-fluid rounded-start usuarios-imagen" alt="...">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-7 float-start">
                     <div class="card-body">
                         <h5 class="card-title usuarios-text">Nombre: <%= user.name %></h5>
                         <h5 class="card-title usuarios-text">Apellido: <%= user.surname %></h5>
@@ -24,16 +24,26 @@
                         <h5 class="card-title usuarios-text">Código Postal: <%= user.code %></h5>
                     </div>
                 </div>
+                <% if(locals.isLogged){ %>
+                        <div class="col-sm-2">
+                            <a class="float-start" href="/users/edit/<%= user.id %>"><i class="fas fa-edit"></i></a>
+                            <a class="float-start" href="/users/logout"><i class="fas fa-sign-out-alt"></i></a>
+                        </div>
+                <% } %>
                 </div>
             </div>
         </div>
-        <div class="producto-detalle-caracteristicas-botones">
-            <button type="submit" class="btn btn-primary"><a href="/users/edit/<%= user.id %>">Editar datos</a></button>
-            <button type="submit" class="btn btn-primary"><a href="/users/logout">Cerrar sesión</a></button>
+        <div class="container text-center">
+        <div class="row justify-content-center">
             <% if(user.role_id === 1) { %>
-            <button type="submit" class="btn btn-primary"><a href="/admin/adminProducts/">Productos</a></button>
-            <button type="submit" class="btn btn-primary"><a href="/admin/adminUsers/">Usuarios</a></button>
+            <div class="col-sm-3">
+            <button type="submit" class="btn btn-primary"><a href="/admin/adminProducts/">Administrar Productos</a></button>
+            </div>
+            <div class="col-sm-3">
+            <button type="submit" class="btn btn-primary"><a href="/admin/adminUsers/">Administrar Usuarios</a></button>
+            </div>
             <% } %>
+        </div>
         </div>
     </main>
     <hr>
