@@ -123,13 +123,13 @@ module.exports = {
     if(search != ""){
       db.Products.findAll({
         where: {
-          name: {
+          product: {
             [db.Sequelize.Op.like]: '%' + search + '%'
           }
         }
       })
-        .then((producto)=>{
-          res.render(path.join(__dirname, "../views/products/productsSearch"), {producto, toThousand})
+        .then((products)=>{
+          res.render(path.join(__dirname, "../views/products/productSearch"), {products, toThousand})
         })
     }else{
       res.redirect("/");

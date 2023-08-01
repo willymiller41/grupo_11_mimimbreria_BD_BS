@@ -5,8 +5,8 @@
     <%- include('../partials/header')  %>
     <div class="container-fluid">
         <div class="row seccion-titulos">
-            <div class="col-3">
-                <h2>Listado de productos</h2>
+            <div class="col-4">
+                <h2>Resultado de búsqueda</h2>
             </div>
             <div class="col-1">
                 <% if(locals.isLogged){
@@ -24,7 +24,6 @@
                     <% if(locals.isLogged){
                         if(locals.userLogged.role_id === 1 || locals.userLogged.role_id === 2) { %>
                             <div class="float-start">
-                                
                                 <a href="/products/edit/<%= product.id %>"><i class="fas fa-edit"></i></a>
                                 <!-- Button trigger modal -->
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">

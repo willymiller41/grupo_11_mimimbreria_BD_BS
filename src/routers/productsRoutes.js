@@ -50,6 +50,7 @@ router.get("/detail/:id/", productsController.productDetail);
 router.get("/edit/:id", authMiddleware, productsController.productEdit);
 router.post('/edit/:id', upload.single('image'), productsController.productUpdate);
 router.get('/delete/:id', productsController.productDelete);
+router.post('/search', productsController.productSearch);
 
 module.exports = router;
 
