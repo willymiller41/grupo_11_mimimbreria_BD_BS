@@ -52,16 +52,37 @@
                         <% }} %>
                     <a href="/products/detail/<%= product.id %>"><img src="/img/products/<%= product.image %>" class="card-img-top" alt="<%= product.product %>"></a>
                     <div class="card-body">
-                    <p class="card-title"><%= product.product %></p>
-                    <p class="card-text">$ <%= product.price %></p>
-                    <div class="row text-center">
-                        <div class="col">
-                            <a href="/products/detail/<%= product.id %>">Ver más</a>
-                        </div>
-                        <div class="col">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                    </div>
+                        <p class="card-title"><%= product.product %></p>
+                        <% if(product.discount > 0) { 
+                            const descuento = product.price * product.discount / 100;
+                            const precioConDescuento = product.price - descuento
+                            %>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="card-text" style="text-decoration: line-through;">$ <%= toThousand(product.price) %></p>
+                                </div>
+                                <div class="col">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="card-text">$ <%= toThousand(precioConDescuento) %></p>
+                                </div>
+                                <div class="col">
+                                    <p class="card-text"><%= product.discount %> % OFF</p>
+                                </div>
+                            </div>
+                        <% }else { %>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="card-text">$ <%= toThousand(product.price) %></p>
+                                </div>
+                                <div class="col">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                            </div>
+                        <% } %>
                     </div>
                 </div>
         <% }}) %>

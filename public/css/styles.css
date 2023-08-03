@@ -4,11 +4,20 @@
 
 }
 
+.pruebaTachado{
+    text-decoration: line-through;
+}
 
 /* Elementos del Body */
 body{
     background: #f9f9f9 url(../img/bg.jpg);
     margin: 0px;
+}
+
+nav{
+    background: url(../img/nav_bg.jpg);
+    width: 100%;
+    height: auto;
 }
 
 .error-msg{

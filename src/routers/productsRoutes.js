@@ -4,7 +4,8 @@ const productsController = require('../controllers/productsController');
 const multer = require('multer');
 const path = require("path");
 const { body } = require('express-validator');
-const authMiddleware = require('../middlewares/authMiddleware');
+const editorMiddleware = require('../middlewares/editorMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware')
 
 //Seteo de Multer
 const storage = multer.diskStorage({
@@ -44,12 +45,12 @@ validations = [
 
 router.get("/list", productsController.list);
 router.get("/list/:id", productsController.listCategory);
-router.get("/create/", authMiddleware, productsController.productCreate);
-router.post("/create/", authMiddleware, upload.single('image'), validations, productsController.productStore);
+router.get("/create/", authMiddleware, editorMiddleware, productsController.productCreate);
+router.post("/create/", authMiddleware, editorMiddleware, upload.single('image'), validations, productsController.productStore);
 router.get("/detail/:id/", productsController.productDetail);
-router.get("/edit/:id", authMiddleware, productsController.productEdit);
+router.get("/edit/:id", authMiddleware, editorMiddleware, productsController.productEdit);
 router.post('/edit/:id', upload.single('image'), productsController.productUpdate);
-router.get('/delete/:id', productsController.productDelete);
+router.get('/delete/:id', authMiddleware, editorMiddleware, productsController.productDelete);
 router.post('/search', productsController.productSearch);
 
 module.exports = router;
