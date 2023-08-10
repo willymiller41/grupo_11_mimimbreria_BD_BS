@@ -52,6 +52,8 @@ router.get("/edit/:id", authMiddleware, editorMiddleware, productsController.pro
 router.post('/edit/:id', upload.single('image'), productsController.productUpdate);
 router.get('/delete/:id', authMiddleware, editorMiddleware, productsController.productDelete);
 router.post('/search', productsController.productSearch);
+router.post('/comment/:id', authMiddleware, productsController.productComment);
+router.get('/comment/:id', authMiddleware, productsController.productComment);
 
 module.exports = router;
 

@@ -47,8 +47,8 @@ a{
 }
 
 .float-start i{
-    padding: 5px;
-    font-size: 20px;
+    padding: 5px !important;
+    font-size: 20px !important;
 }
 
 .btn-primary{
@@ -200,4 +200,9 @@ a{
 
 .usuarios-text{
     color:white !important;
+}
+
+.comment-avatar{
+    max-width: 80px;
+    border-radius: 50%;
 }

@@ -16,6 +16,7 @@ module.exports = {
       })
 	},
 
+  //Listado de productos por categoría
   listCategory: (req, res) => {
     db.Products.findAll(
         {include: ['categories'],
@@ -30,16 +31,19 @@ module.exports = {
 
   //Detalle de producto
   productDetail: (req, res) => {
-    db.Products.findByPk(req.params.id, {include: ['categories']})
-    .then((product)=>{
-      db.Categories.findAll()
-      .then((categories)=>{
-        db.Products.findAll({include: ['categories']})
-        .then((products) =>{
-          res.render(path.join(__dirname, "../views/products/productDetail"), {products, product, categories, toThousand})
+        db.Comments.findAll({include: ['products', 'users']})
+        .then((comments)=>{
+          db.Products.findByPk(req.params.id, {include: ['categories']})
+          .then((product)=>{
+            db.Categories.findAll()
+            .then((categories)=>{
+              db.Products.findAll({include: ['categories']})
+              .then((products) =>{
+                res.render(path.join(__dirname, "../views/products/productDetail"), {products, product, categories, comments, toThousand})
+              })
+            })
+          })
         })
-      })
-    })
   },
   
   //Agregar producto
@@ -134,6 +138,32 @@ module.exports = {
     }else{
       res.redirect("/");
     }
+  },
+
+  productComment: (req, res) => {
+    const comment = req.body.comment;
+    const userId = req.session.userLogged.id;
+    const productId = req.params.id;
+    db.Comments.create({
+      comment: comment,
+      user_id: userId,
+      product_id: productId
+    })
+      .then(()=>{
+        db.Comments.findAll({include: ['products', 'users']})
+        .then((comments)=>{
+          db.Products.findByPk(productId, {include: ['categories']})
+          .then((product)=>{
+            db.Categories.findAll()
+            .then((categories)=>{
+              db.Products.findAll({include: ['categories']})
+              .then((products) =>{
+                res.render(path.join(__dirname, "../views/products/productDetail"), {products, product, categories, comments, toThousand})
+              })
+            })
+          })
+        })
+      })
   },
         
   //Carrito de compras

@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-sm-7 float-start">
                         <h3 class="productos-text"><%= product.product %></h3>
-                                                <h4 class="productos-text">Descripción: </h4>
+                        <h4 class="productos-text">Descripción: </h4>
                         <h5 class="productos-text"><%= product.description %></h5>
                         <h4 class="productos-text">Categoría: <%= product.categories.category %></h4>
                             <% if(product.discount > 0) { 
@@ -73,81 +73,123 @@
                     <% if(locals.isLogged){
                         if(locals.userLogged.role_id === 3) { %>
                             <div class="col-sm-1">
-                                <a class="float-start" href="#"><i class="fas fa-comment"></i></i></a>
+                                <form action="/products/comment/<%= product.id %>" method="post">
+                                    <!-- Button trigger modal -->
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="float-start">
+                                        <i class="fas fa-comment"></i>
+                                    </a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Comentarios</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                <h5>Ingrese su comentario: </h5>
+                                                <textarea name="comment" id="" cols="60" rows="5"></textarea>
+                                                </div>
+                                                <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-primary">Comentar</a></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                                 <a class="float-start" href="#"><i class="fas fa-shopping-cart"></i></a>
                             </div>
                     <% }}else{ %>
                             <div class="col-sm-1">
-                                <a class="float-start" href="#"><i class="fas fa-comment"></i></i></a>
+                                <a class="float-start" href="/products/comment/<%= product.id %>"><i class="fas fa-comment"></i></a>
                                 <a class="float-start" href="#"><i class="fas fa-shopping-cart"></i></a>
                             </div>
                     <% } %>
                 </div>
             </div>
         <hr>
-        <div class="container-fluid">
-        <div class="seccion-titulos">
-            <h2>Productos similares</h2>
-        </div>
-        <div class="row col-12 justify-content-center">
-            <% products.forEach(function(similarProduct){
-                if(similarProduct.categories.category === product.categories.category && similarProduct.id != product.id){ %>
-                        <div class="card productos" style="width: 15rem;">
-                            <a href="/products/detail/<%= similarProduct.id %>"><img src="/img/products/<%= similarProduct.image %>" class="card-img-top" alt="<%= similarProduct.product %>"></a>
-                            <div class="card-body">
-                                <p class="card-title"><%= similarProduct.product %></p>
-                                <% if(product.discount > 0) { 
-                                const descuento = similarProduct.price * similarProduct.discount / 100;
-                                const precioConDescuento = similarProduct.price - descuento
-                                %>
-                                <div class="row">
-                                    <div class="col">
-                                        <p class="card-text" style="text-decoration: line-through;">$ <%= toThousand(similarProduct.price) %></p>
-                                    </div>
-                                    <div class="col">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <p class="card-text">$ <%= toThousand(precioConDescuento) %></p>
-                                    </div>
-                                    <div class="col">
-                                        <p class="card-text"><%= similarProduct.discount %> % OFF</p>
-                                    </div>
-                                </div>
-                                <% }else { %>
-                                <div class="row">
-                                    <div class="col">
-                                        <p class="card-text">$ <%= toThousand(similarProduct.price) %></p>
-                                    </div>
-                                    <div class="col">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </div>
-                                </div>
-                                <% } %>
-                            </div>
-                        </div>
-            <% }}) %>
-            </div>
-        </div>
-        <hr>
         <div class="container">
             <div class="row col-12 justify-content-center">
-                <h2>Comentarios</h2>
+                <%  let cont2 = 0;
+                    comments.forEach(function(comment){
+                    if(product.id === comment.product_id && comment.published === 1){ cont2 += 1}});
+                    if(cont2 > 0) { %>
+                <div class="seccion-titulos">
+                    <h2>Comentarios</h2>
+                </div>
                 <hr>
-                <div class="row col-sm-4">
-                    <div class="col">
-                        <a class="usuarios" href="#"><i class="fas fa-user"></i></a>
-                        <h4>Marcela</h4>
-                        <h5>31 de mayo 2023</h5>
-                        <h5>*****</h5>
-                    </div>
-                </div>
-                <div class="row col-sm-6">
-                    <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque veritatis non ad sed modi ipsum cum exercitationem reprehenderit quae voluptatibus, adipisci quos praesentium unde quibusdam ipsa placeat, saepe aliquam perspiciatis.</h5>
-                </div>
+                <% comments.forEach(function(comment){
+                    if(product.id === comment.product_id && comment.published === 1){ %>
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="/img/avatars/<%= comment.users.avatar %>" alt="" class="comment-avatar">
+                            </div>
+                            <div class="col-3">
+                                <h4><%= comment.users.name %></h4>
+                                <h5><%= comment.createdAt %></h5>    
+                            </div>
+                            <div class="col-6">
+                                <h5><%= comment.comment %></h5>
+                            </div>
+                        </div>
+                        <hr>
+                <% }})} %>
             </div>
+        </div>
+        <div class="container-fluid">
+            <%  var cont1 = 0;
+                products.forEach(function(similarProduct){
+                    if(similarProduct.categories.category === product.categories.category && similarProduct.id != product.id){
+                        cont1 += 1}
+                    })
+                if(cont1 > 0) {
+                     %>
+            <div class="seccion-titulos">
+                <h2>Productos similares</h2>
+            </div>
+            <div class="row col-12 justify-content-center">
+                <% products.forEach(function(similarProduct){
+                    if(similarProduct.categories.category === product.categories.category && similarProduct.id != product.id){ %>
+                            <div class="card productos" style="width: 15rem;">
+                                <a href="/products/detail/<%= similarProduct.id %>"><img src="/img/products/<%= similarProduct.image %>" class="card-img-top" alt="<%= similarProduct.product %>"></a>
+                                <div class="card-body">
+                                    <p class="card-title"><%= similarProduct.product %></p>
+                                    <% if(product.discount > 0) { 
+                                    const descuento = similarProduct.price * similarProduct.discount / 100;
+                                    const precioConDescuento = similarProduct.price - descuento
+                                    %>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="card-text" style="text-decoration: line-through;">$ <%= toThousand(similarProduct.price) %></p>
+                                        </div>
+                                        <div class="col">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="card-text">$ <%= toThousand(precioConDescuento) %></p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="card-text"><%= similarProduct.discount %> % OFF</p>
+                                        </div>
+                                    </div>
+                                    <% }else { %>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="card-text">$ <%= toThousand(similarProduct.price) %></p>
+                                        </div>
+                                        <div class="col">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                <% }}) %>
+            </div>
+            <% } %>
         </div>
     </main>
     <hr>

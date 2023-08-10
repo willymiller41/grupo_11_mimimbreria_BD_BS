@@ -36,11 +36,14 @@
         <div class="container text-center">
         <div class="row justify-content-center">
             <% if(user.role_id === 1) { %>
-            <div class="col-sm-3">
-            <button type="submit" class="btn btn-primary"><a href="/admin/adminProducts/">Administrar Productos</a></button>
+            <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary"><a href="/admin/adminProducts/">Productos</a></button>
             </div>
-            <div class="col-sm-3">
-            <button type="submit" class="btn btn-primary"><a href="/admin/adminUsers/">Administrar Usuarios</a></button>
+            <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary"><a href="/admin/adminUsers/">Usuarios</a></button>
+            </div>
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-primary"><a href="/admin/adminComments/">Comentarios</a></button>
             </div>
             <% } %>
         </div>

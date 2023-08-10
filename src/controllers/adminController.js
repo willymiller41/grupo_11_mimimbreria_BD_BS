@@ -183,6 +183,42 @@ module.exports = {
   //Carrito de compras
   shoppingCart: (req, res) => {
     res.render(path.join(__dirname, "../views/products/shoppingCart"))
-  }
+  },
   
+  //Administración de comentarios
+  comments: (req, res) => {
+    db.Comments.findAll({include: ['users', 'products'],
+    where: {published: 0}})
+    .then((comments)=>{
+        res.render(path.join(__dirname, "../views/admin/adminComments"), {comments})
+      })
+  },
+
+  //Publicar un comentario
+  commentsPublish: (req, res) => {
+    db.Comments.update({
+      published: 1,
+    },{
+      where: {
+        id: req.params.id
+      }
+    })
+      .then(()=>{
+        res.redirect('/admin/adminComments')
+      })
+  },
+
+  //Eliminar un comentario
+    //Eliminar producto
+    commentsDelete: (req, res) => {
+      db.Comments.destroy({
+        where: {
+          id: req.params.id
+        }
+      })
+        .then(()=>{
+          res.redirect('/admin/adminComments')
+        })
+    },
+
 }
