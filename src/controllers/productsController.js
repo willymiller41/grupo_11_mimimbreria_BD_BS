@@ -146,6 +146,7 @@ module.exports = {
     const productId = req.params.id;
     db.Comments.create({
       comment: comment,
+      published: 0,
       user_id: userId,
       product_id: productId
     })
