@@ -49,9 +49,30 @@
                                 </a>                      
                             </td>
                             <td>
-                                <a href="/users/userDelete/<%= user.id %>">
-                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                <!-- Button trigger modal -->
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                 </a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminación de usuario</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h5>¿Está seguro de eliminar al usuario?</h5>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                <a href="/users/delete/<%=user.id %>">
+                                                    <button type="submit" class="btn btn-danger">Borrar</i></button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     <% }) %>
