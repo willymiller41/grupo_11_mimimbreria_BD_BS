@@ -152,7 +152,9 @@
                 <% products.forEach(function(similarProduct){
                     if(similarProduct.categories.category === product.categories.category && similarProduct.id != product.id){ %>
                             <div class="card productos" style="width: 15rem;">
-                                <a href="/products/detail/<%= similarProduct.id %>"><img src="/img/products/<%= similarProduct.image %>" class="card-img-top" alt="<%= similarProduct.product %>"></a>
+                                <div class="product-image-container">
+                                    <a href="/products/detail/<%= similarProduct.id %>"><img src="/img/products/<%= similarProduct.image %>" class="card-img-top" alt="<%= similarProduct.product %>"></a>
+                                </div>
                                 <div class="card-body">
                                     <p class="card-title"><%= similarProduct.product %></p>
                                     <% if(product.discount > 0) { 

@@ -96,6 +96,7 @@ module.exports = {
       name: req.body.name,
       price: req.body.price,
       category_id: req.body.category,
+      discount: req.body.discount,
       description: req.body.description,
       image: req.file,
       stock: req.body.stock
