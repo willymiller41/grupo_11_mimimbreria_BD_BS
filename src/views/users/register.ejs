@@ -10,28 +10,31 @@
         <hr>
         <div class="row justify-content-center">
             <div class="col-md-5">
-                <form action="/users/register" method="post" class="register-form" enctype="multipart/form-data">
+                <form action="/users/register" method="post" class="register-form" enctype="multipart/form-data" id="register-form">
                     <% if(locals.errors && errors.name){ %>
                         <div class="error-msg"><%= errors.name.msg %></div> 
                     <% } %>
+                    <h5 id="name-error" class="validations-errors"></h5>
                     <div class="input-group">
                         <span class="input-group-text">Nombre: </span>
-                        <input type="text" aria-label="name" class="form-control" name="name">
+                        <input type="text" aria-label="name" class="form-control" name="name" id="name">
                     </div>
                     <% if(locals.errors && errors.surname){ %>
                         <div class="error-msg"><%= errors.surname.msg %></div> 
                     <% } %>
+                    <h5 id="surname-error" class="validations-errors"></h5>
                     <div class="input-group">
                         <span class="input-group-text">Apellido: </span>
-                        <input type="text" aria-label="surname" class="form-control" name="surname">
+                        <input type="text" aria-label="surname" class="form-control" name="surname" id="surname">
                     </div>
                     <% if(locals.errors && errors.email){ %>
                         <div class="error-msg"><%= errors.email.msg %></div> 
                     <% } %>
-                    <label class="visually-hidden" for="autoSizingInputGroup">Email</label>
+                    <h5 id="email-error" class="validations-errors"></h5>
+                    <label class="visually-hidden" for="email">Email</label>
                     <div class="input-group">
                         <div class="input-group-text">@</div>
-                        <input type="email" class="form-control" id="autoSizingInputGroup" name="email" placeholder="Email: ">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email: ">
                     </div>
                     <div class="input-group">
                         <span class="input-group-text">Teléfono: </span>
@@ -40,16 +43,18 @@
                     <% if(locals.errors && errors.address){ %>
                         <div class="error-msg"><%= errors.address.msg %></div> 
                     <% } %>
+                    <h5 id="address-error" class="validations-errors"></h5>
                     <div class="input-group">
                         <span class="input-group-text">Domicilio: </span>
-                        <input type="text" aria-label="address" class="form-control" name="address">
+                        <input type="text" aria-label="address" class="form-control" name="address" id="address">
                     </div>
                     <% if(locals.errors && errors.code){ %>
                         <div class="error-msg"><%= errors.code.msg %></div> 
                     <% } %>
+                    <h5 id="code-error" class="validations-errors"></h5>
                     <div class="input-group">
                         <span class="input-group-text">Código Postal: </span>
-                        <input type="text" aria-label="code" class="form-control" name="code">
+                        <input type="text" aria-label="code" class="form-control" name="code" id="code">
                     </div>
                     <% if(locals.errors && errors.avatar){ %>
                         <div class="error-msg"><%= errors.avatar.msg %></div> 
@@ -61,16 +66,18 @@
                     <% if(locals.errors && errors.password){ %>
                         <div class="error-msg"><%= errors.password.msg %></div> 
                     <% } %>
+                    <h5 id="password-error" class="validations-errors"></h5>
                     <div class="input-group">
                         <span class="input-group-text">Contraseña: </span>
-                        <input type="password" aria-label="password" class="form-control" name="password">
+                        <input type="password" aria-label="password" class="form-control" name="password" id="password">
                     </div>
                     <% if(locals.errors && errors.password2){ %>
                         <div class="error-msg"><%= errors.password2.msg %></div> 
                     <% } %>
+                    <h5 id="password2-error" class="validations-errors"></h5>
                     <div class="input-group">
                         <span class="input-group-text">Repita su contraseña: </span>
-                        <input type="password" aria-label="password2" class="form-control" name="password2">
+                        <input type="password" aria-label="password2" class="form-control" name="password2" id="password2">
                     </div>
                     <div class="row mb-3 text-center">
                         <div class="col-md-6">
@@ -85,6 +92,7 @@
         </div>
     </main>
     <hr>
+    <script src="/js/usersRegisterValidation.js"></script>
     <%- include('../partials/bs')  %>
     <%- include('../partials/footer')  %>
 </body>

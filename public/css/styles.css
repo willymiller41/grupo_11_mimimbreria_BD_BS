@@ -8,6 +8,21 @@
     text-decoration: line-through;
 }
 
+.invalid{
+    border: 2px solid #f08080 !important;
+}
+
+.valid{
+    border: 2px solid #90ee90 !important;
+}
+
+.validations-errors{
+    padding-top: 5px;
+    color: red !important;
+    font-size: 14px !important;
+    font-style: italic !important;
+}
+
 /* Elementos del Body */
 body{
     background: #f9f9f9 url(../img/bg.jpg);

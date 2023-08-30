@@ -1,6 +1,7 @@
 const path = require('path');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
+const fs = require('fs');
 
 const db = require('../database/models')
 
@@ -18,12 +19,25 @@ module.exports = {
       { where: { email: req.body.email } }
     ).then((users) => {
        if(users.length > 0){
+        try {
+          let imageFile = req.file.filename
+          console.log(imageFile)
+          fs.unlinkSync(path.join(__dirname, "../../public/img/avatars/")+ imageFile)
+          console.log('Archivo eliminado')
+        } catch(err) {
+          console.error('Error eliminando archivo', err)
+        }
         return res.render(path.join(__dirname, "../views/users/register"), {errors: {email:{msg:"El email ya está registrado"}}, oldData: req.body});
         }else{  
           let errors = validationResult(req);
             if (errors.errors.length > 0) {
               res.render(path.join(__dirname, "../views/users/register"), {errors: errors.mapped(), oldData: req.body})
             }else{
+              if(req.file){
+                avatar_image = req.file.filename
+              }else{
+                avatar_image = 'img_profile_default.jpg'
+              }
               db.Users.create({
                 name: req.body.name,
                 surname: req.body.surname,
@@ -31,7 +45,9 @@ module.exports = {
                 phone: req.body.phone,
                 address: req.body.address,
                 code: req.body.code,
-                avatar: req.file.filename,
+                // avatar: req.file.filename,
+                // Asigno una imagen por defecto
+                avatar: avatar_image,
                 password: bcrypt.hashSync(req.body.password, 10),
                 role_id: 3,
               })
@@ -64,7 +80,7 @@ module.exports = {
           //Aquí verifico si la clave que está colocando es la misma que está hasheada en la Base de datos - El compareSync retorna un true ó un false
           if(bcrypt.compareSync(req.body.password,usuarioLogueado[0].password) === false){
             usuarioLogueado = [];
-            return res.render(path.join(__dirname, "../views/users/login"), {errors: {email:{msg:"credenciales inválidas"}}});
+            return res.render(path.join(__dirname, "../views/users/login"), {errors: {email:{msg:"Credenciales inválidas"}}});
           }
         }
       }

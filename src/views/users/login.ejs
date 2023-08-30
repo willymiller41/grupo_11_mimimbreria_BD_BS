@@ -10,20 +10,22 @@
         <hr>
         <div class="row justify-content-center">
             <div class="col-md-4">
-                <form action="/users/login" method="post">
+                <form action="/users/login" method="post" class="login-form" id="login-form">
                     <% if(locals.errors && errors.email){ %>
                         <div class="error-msg"><%= errors.email.msg %></div> 
                     <% } %>
+                    <h5 id="email-error" class="validations-errors"></h5>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-default">Email: </span>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="email" value="<%= locals.oldData ? oldData.email : null  %>">
+                        <input type="text" class="form-control" id="email" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="email" value="<%= locals.oldData ? oldData.email : null  %>">
                     </div>
                     <% if(locals.errors && errors.password){ %>
                         <div class="error-msg"><%= errors.password.msg %></div> 
                     <% } %>
+                    <h5 id="password-error" class="validations-errors"></h5>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-default">Contraseña: </span>
-                        <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="password">
+                        <input type="password" class="form-control" id="password" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="password">
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-10">
@@ -48,6 +50,7 @@
         </div>
     </main>
     <hr>
+    <script src="/js/usersLoginValidation.js"></script>
     <%- include('../partials/bs')  %>
     <%- include('../partials/footer')  %>
 </body>
