@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const cartController = require('../controllers/cartController');
-
-router.get("/carts/cart", cartController.cart);
+console.log('estoy en el router de carrito')
+router.get("/cart", cartController.cart);
 
 module.exports = router;

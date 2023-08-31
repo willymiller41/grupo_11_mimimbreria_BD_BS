@@ -41,31 +41,36 @@
                     <% }} %>
                 <div class="row g-0">
                     <div class="col-sm-4">
-                        <img src="/img/products/<%= product.image %>" alt="" class="imagen">
+                        <img src="/img/products/<%= product.image %>" alt="<%= product.image %>" class="imagen">
                     </div>
                     <div class="col-sm-7 float-start">
-                        <h3 class="productos-text"><%= product.product %></h3>
+                        <h3 class="productos-text product"><%= product.product %></h3>
                         <h4 class="productos-text">Descripción: </h4>
-                        <h5 class="productos-text"><%= product.description %></h5>
+                        <h5 class="productos-text description"><%= product.description %></h5>
                         <h4 class="productos-text">Categoría: <%= product.categories.category %></h4>
                             <% if(product.discount > 0) { 
                             const descuento = product.price * product.discount / 100;
                             const precioConDescuento = product.price - descuento
                             %>
                             <div class="row">
+                                <div class="col-sm-1"><h4 class="productos-text">$</h4></div>
                                 <div class="col">
-                                    <h4 class="productos-text" style="text-decoration: line-through;">$ <%= toThousand(product.price) %></h4>
+                                    <h4 class="productos-text" style="text-decoration: line-through;"><%= toThousand(product.price) %></h4>
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-sm-1"><h4 class="productos-text">$</h4></div>
+                                <div class="col-sm-2">
+                                    <h4 class="productos-text price-discount"><%= toThousand(precioConDescuento) %></h4>
+                                </div>
                                 <div class="col">
-                                    <h4 class="productos-text">$ <%= toThousand(precioConDescuento) %> - <%= product.discount %> % OFF</h4>
+                                    <h4 class="productos-text"><%= product.discount %>% OFF</h4>
                                 </div>
                             </div>
                             <% }else { %>
                             <div class="row">
                                 <div class="col">
-                                    <h4 class="productos-text">$ <%= toThousand(product.price) %></h4>
+                                    $ <h4 class="productos-text price"><%= toThousand(product.price) %></h4>
                                 </div>
                             </div>
                             <% } %>
@@ -98,7 +103,7 @@
                                         </div>
                                     </div>
                                 </form>
-                                <a class="float-start" href="#"><i class="fas fa-shopping-cart"></i></a>
+                                <a class="cart-btn float-start" href="#"><i class="fas fa-shopping-cart"></i></a>
                             </div>
                     <% }}else{ %>
                             <div class="col-sm-1">
@@ -195,6 +200,7 @@
         </div>
     </main>
     <hr>
+    <script src="/js/cartAddItems.js"></script>
     <%- include('../partials/bs')  %>
     <%- include('../partials/footer')  %>
 </body>

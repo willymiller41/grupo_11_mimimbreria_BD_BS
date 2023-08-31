@@ -5,7 +5,7 @@ const mainRoutes = require('./routers/mainRoutes');
 const productsRoutes = require('./routers/productsRoutes');
 const usersRoutes = require('./routers/usersRoutes');
 const adminRoutes = require('./routers/adminRoutes');
-//const cartRoutes = require('./routers/cartRoutes');
+const cartRoutes = require('./routers/cartRoutes');
 const session = require('express-session');
 const cookie = require('cookie-parser');
 const methodOverride = require('method-override');
@@ -35,8 +35,7 @@ app.get('/videoArtesanos', mainRoutes);
 app.use("/users", usersRoutes);
 app.use('/products', productsRoutes);
 app.use('/admin', adminRoutes);
-
-//app.get('/carts/cart', cartRoutes);
+app.use('/carts', cartRoutes);
 
 //APIs
 app.use('/api/products',apiProductsRouter);
