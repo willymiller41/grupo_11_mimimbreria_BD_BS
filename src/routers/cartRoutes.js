@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const cartController = require('../controllers/cartController');
-console.log('estoy en el router de carrito')
-router.get("/cart", cartController.cart);
+const authMiddleware = require('../middlewares/authMiddleware');
+
+router.get("/cart", authMiddleware, cartController.cart);
 
 module.exports = router;

@@ -5,6 +5,7 @@ if(document.readyState == 'loading'){
 }
 
 function ready() {
+    // localStorage.removeItem('cart')
     if(JSON.parse(localStorage.getItem('cart')) == null){
         localStorage.setItem('cart', JSON.stringify([]))
     }
@@ -26,7 +27,8 @@ function addItem() {
         product: document.querySelector('.product').innerText,
         description: document.querySelector('.description').innerText,
         price: parseInt(set_price.replace('.','')),
-        imagen: document.querySelector('.imagen').alt
+        imagen: document.querySelector('.imagen').alt,
+        user_id: parseInt(document.querySelector('.user-id').innerText)
     }
 
     if(cart_products.length == 0){
@@ -45,4 +47,5 @@ function addItem() {
         }
     }
     localStorage.setItem('cart', JSON.stringify(cart_products))
+    window.location.href = '/carts/cart'
 }

@@ -4,7 +4,11 @@ const path = require("path");
 
 let cartController = {
 
-    cart: (req, res) => {
+  cart: (req, res) => {
+    res.render(path.join(__dirname, "../views/carts/cart"), {user: req.session.userLogged});
+  }
+
+/*     cart: (req, res) => {
         db.Products.findAll(
             {include: ['categories']})
             .then((products)=>{
@@ -13,7 +17,7 @@ let cartController = {
               res.render(path.join(__dirname, "../views/carts/cart"), {products, categories, toThousand})
             })
           })
-        }
+        } */
     
  };
  

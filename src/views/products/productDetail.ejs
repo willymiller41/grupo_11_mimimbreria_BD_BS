@@ -77,6 +77,7 @@
                     </div>
                     <% if(locals.isLogged){
                         if(locals.userLogged.role_id === 3) { %>
+                            <h1 class="user-id" hidden><%= locals.userLogged.id %></h1>
                             <div class="col-sm-1">
                                 <form action="/products/comment/<%= product.id %>" method="post">
                                     <!-- Button trigger modal -->
@@ -108,7 +109,7 @@
                     <% }}else{ %>
                             <div class="col-sm-1">
                                 <a class="float-start" href="/products/comment/<%= product.id %>"><i class="fas fa-comment"></i></a>
-                                <a class="float-start" href="#"><i class="fas fa-shopping-cart"></i></a>
+                                <a class="float-start" href="/carts/cart"><i class="fas fa-shopping-cart"></i></a>
                             </div>
                     <% } %>
                 </div>
@@ -171,7 +172,7 @@
                                             <p class="card-text" style="text-decoration: line-through;">$ <%= toThousand(similarProduct.price) %></p>
                                         </div>
                                         <div class="col">
-                                            <i class="fas fa-shopping-cart"></i>
+                                            <a href="/carts/cart"><i class="cart-btn fas fa-shopping-cart"></i></a>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -188,7 +189,7 @@
                                             <p class="card-text">$ <%= toThousand(similarProduct.price) %></p>
                                         </div>
                                         <div class="col">
-                                            <i class="fas fa-shopping-cart"></i>
+                                            <a href="/carts/cart"><i class="cart-btn fas fa-shopping-cart"></i></a>
                                         </div>
                                     </div>
                                     <% } %>
@@ -200,7 +201,10 @@
         </div>
     </main>
     <hr>
-    <script src="/js/cartAddItems.js"></script>
+    <% if(locals.isLogged){
+        if(locals.userLogged.role_id === 3) { %>
+            <script src="/js/cartAddItems.js"></script>
+    <% }} %>
     <%- include('../partials/bs')  %>
     <%- include('../partials/footer')  %>
 </body>
