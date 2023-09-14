@@ -5,33 +5,44 @@ const { Op } = require("sequelize");
 // const moment = require('moment');
 
 module.exports = {
-    'list': (req, res) => {
-        db.Users.findAll({include: ['roles']})
-        .then((users)=>{
-            let response = {
-                meta: {
-                    status : 200,
-                    total: users.length,
-                    url: 'api/users/list'
-                },
-                data: users
-            }
-            res.json(response);
-        })
+    'list': async (req, res) =>{
+        let response = {};
+        try {
+            const users = await db.Users.findAll();
+            response.count = users.length;
+            response.users = users.map( (user) =>{
+                return {
+                    id: user.id,
+                    name: user.name,
+                    surname: user.surname,
+                    email: user.email,
+                    avatar: `/img/avatars/${user.avatar}`,
+                    detail: `api/users/${user.id}`
+                }
+            })
+            return res.json(response);
+        } catch (e) {
+            response.msg = "Hubo un error";
+            return res.json(response);
+        }
     },
-    
-    'detail': (req, res) => {
-        db.Products.findByPk(req.params.id, { include : ['categories'] })
-        .then(product => {
-            let respuesta = {
-                meta: {
-                    status: 200,
-                    total: product.length,
-                    url: 'api/:id'
-                },
-                data: product
+
+    'detail': async (req, res) =>{
+        let response = {};
+        try {
+            const user = await db.Users.findByPk(req.params.id, {attributes: {exclude: ['password', 'role_id']}});
+            response.meta = {
+                status: 200,
+                total: user.length,
+                url: `api/users/${req.params.id}`
             }
-            res.json(respuesta);
-        });
-    },
+            response.data = user
+            response.data.avatar = `/img/avatars/${user.avatar}`
+            return res.json(response);
+        } catch (e) {
+            response.msg = "Hubo un error";
+            return res.json(response);
+        }
+    }
+
 }

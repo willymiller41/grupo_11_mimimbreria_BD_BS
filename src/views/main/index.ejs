@@ -51,37 +51,41 @@
                             </div>
                         <% }} %>
                     <div class="product-image-container">
-                        <a href="/products/detail/<%= product.id %>"><img src="/img/products/<%= product.image %>" class="card-img-top" alt="<%= product.product %>"></a>                    
+                        <a href="/products/detail/<%= product.id %>"><img src="/img/products/<%= product.image %>" class="card-img-top imagen" alt="<%= product.image %>"></a>                    
                     </div>
                     <div class="card-body">
-                        <p class="card-title"><%= product.product %></p>
+                        <p class="card-title product"><%= product.product %></p>
+                        <h3 class="index-product-id" hidden><%= product.id %></h3>
                         <% if(product.discount > 0) { 
                             const descuento = product.price * product.discount / 100;
                             const precioConDescuento = product.price - descuento
                             %>
                             <div class="row">
-                                <div class="col">
-                                    <p class="card-text" style="text-decoration: line-through;">$ <%= toThousand(product.price) %></p>
-                                </div>
-                                <div class="col">
-                                    <a href="/carts/cart"><i class="cart-btn fas fa-shopping-cart"></i></a>
+                                <div class="col-8">
+                                    <div class="row">
+                                        <h6 class="col-1 card-text">$ </h6>
+                                        <p class="col-6 card-text" style="text-decoration: line-through;"><%= toThousand(product.price) %></p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col">
-                                    <p class="card-text">$ <%= toThousand(precioConDescuento) %></p>
+                                <div class="col-7">
+                                    <div class="row">
+                                        <h6 class="col-1 card-text">$ </h6>
+                                        <p class="col-6 card-text price-discount"><%= toThousand(precioConDescuento) %></p>
+                                    </div>
                                 </div>
-                                <div class="col">
+                                <div class="col-5">
                                     <p class="card-text"><%= product.discount %> % OFF</p>
                                 </div>
                             </div>
                         <% }else { %>
                             <div class="row">
-                                <div class="col">
-                                    <p class="card-text">$ <%= toThousand(product.price) %></p>
-                                </div>
-                                <div class="col">
-                                    <a href="/carts/cart"><i class="cart-btn fas fa-shopping-cart"></i></a>
+                                <div class="col-8">
+                                    <div class="row">
+                                        <h6 class="col-1 card-text">$ </h6>
+                                        <p class="col-6 card-text price"><%= toThousand(product.price) %></p>
+                                    </div>
                                 </div>
                             </div>
                         <% } %>
@@ -90,10 +94,6 @@
         <% }}) %>
     </div>
     <hr>
-    <% if(locals.isLogged){
-        if(locals.userLogged.role_id === 3) { %>
-            <script src="/js/cartAddItems.js"></script>
-    <% }} %>
     <%- include('../partials/footer')  %>
     <%- include('../partials/bs')  %>
 </body>

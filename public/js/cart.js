@@ -5,7 +5,7 @@ if(document.readyState == 'loading'){
 }
 
 function ready() {
-    //localStorage.removeItem('cart')
+    // localStorage.removeItem('cart')
     let products_table = document.querySelector('.products-table')
     let message_empty_cart = document.querySelector('.message-empty-cart')
     let products_in_cart = (JSON.parse(localStorage.getItem('cart')))
@@ -100,8 +100,9 @@ function cartDisplay(products) {
                     </a>
                 </td>
             </tr>`
-            total += element.subTotal
+            total += parseInt(element.subTotal) 
         });
-        price_total.innerHTML += total
+        price_total.innerHTML = ''
+        price_total.innerHTML += parseInt(total) 
     }
 }

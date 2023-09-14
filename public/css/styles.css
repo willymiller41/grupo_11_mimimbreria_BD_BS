@@ -27,6 +27,10 @@
     justify-content: right;
 }
 
+.card-text{
+    color: white !important;
+}
+
 /* Elementos del Body */
 body{
     background: #f9f9f9 url(../img/bg.jpg);

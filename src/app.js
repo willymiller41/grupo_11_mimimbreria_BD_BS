@@ -45,6 +45,6 @@ app.use((req, res, next) => {
   res.status(404).render("partials/error404");
 })
 
-app.listen('3000', ()=>{
-    console.log('Servidor funcionando en el puerto 3000');
+app.listen('3030', ()=>{
+    console.log('Servidor funcionando en el puerto 3030');
 })
