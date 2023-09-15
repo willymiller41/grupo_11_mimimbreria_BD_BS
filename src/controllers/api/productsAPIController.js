@@ -3,19 +3,22 @@ const db = require('../../database/models');
 const sequelize = db.sequelize;
 const { Op } = require("sequelize");
 const { allowedNodeEnvironmentFlags } = require('process');
-// const moment = require('moment');
 
 module.exports = {
     'list': async (req, res) =>{
-        let response = {};
+        let response = {data: {}};
         try {
             const [products, categories] = await Promise.all([db.Products.findAll({include: [{association: 'categories'}]}), db.Categories.findAll({include: [{association: 'products'}]})])
-            response.count = products.length;
-            response.countByCategory = {};
+            response.data.count = products.length;
+            response.data.countByCategory = {};
             categories.forEach(category => {
-                response.countByCategory[category.category] = category.products.length
+                response.data.countByCategory[category.category] = category.products.length
             });
-            response.products = products.map( (product) =>{
+            response.data.countByOrder = 0;
+            products.forEach(product => {
+                response.data.countByOrder += product.order
+            });
+            response.data.products = products.map( (product) =>{
                 return {
                     id: product.id,
                     product: product.product,
@@ -44,9 +47,6 @@ module.exports = {
                 total: product.length,
                 url: `api/products/${req.params.id}`
             }
-/*             response.data = product
-            response.data.image = `/img/products/${product.image}`
-            response.data.categories = product.categories.category */
             response.data = {
                 id: product.id,
                 product: product.product,

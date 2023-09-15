@@ -6,11 +6,12 @@ const { Op } = require("sequelize");
 
 module.exports = {
     'list': async (req, res) =>{
-        let response = {};
+        let response = {data: {}};
         try {
             const users = await db.Users.findAll();
-            response.count = users.length;
-            response.users = users.map( (user) =>{
+
+            response.data.count = users.length;
+            response.data.users = users.map( (user) =>{
                 return {
                     id: user.id,
                     name: user.name,
