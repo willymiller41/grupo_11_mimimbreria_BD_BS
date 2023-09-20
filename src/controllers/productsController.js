@@ -56,6 +56,7 @@ module.exports = {
 
   //Guardar producto
   productStore: (req, res) => {
+    console.log('Entramos al controlador')
     let errors = validationResult(req);
     if (errors.errors.length > 0) {
       db.Categories.findAll()

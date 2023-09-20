@@ -82,29 +82,12 @@ window.onload = function(){
             stock_error.innerHTML = ''
             stock.classList.remove('invalid')
             stock.classList.add('valid')
-        }
-
-        //Valido coincidencia de password y password2
-        const password2 = document.querySelector('#password2')
-        const password2_error = document.querySelector('#password2-error')
-        if(password2.value == ''){
-            password2_error.innerHTML = 'Debe reingresar la contraseña'
-            password2.classList.add('invalid')
-            password2.classList.remove('valid')
-        }else if(password.value !== password2.value) {
-            password2_error.innerHTML = 'Las contraseñas no coinciden'
-            password2.classList.add('invalid')
-            password2.classList.remove('valid')
-        }else {
-            password2_error.innerHTML = ''
-            password2.classList.remove('invalid')
-            password2.classList.add('valid')
             send_form()
         }
         
     })
     
     function send_form() {
-        document.getElementById('register-form').submit()
+        document.getElementById('product-form').submit()
     }
 }

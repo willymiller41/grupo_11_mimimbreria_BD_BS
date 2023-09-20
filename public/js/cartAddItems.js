@@ -16,6 +16,7 @@ function ready() {
 function addItem() {
     let regex = /\/products\/detail\/(\d+)/
     let url = window.location.href
+    console.log(url)
     let cart_products = (JSON.parse(localStorage.getItem('cart')))
     if(document.querySelector('.price-discount') !== null){
         set_price = document.querySelector('.price-discount').innerText
