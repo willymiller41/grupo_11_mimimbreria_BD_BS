@@ -92,7 +92,10 @@ module.exports = {
   },
 
   //Guardar producto editado
-  productUpdate: (req, res) => {
+/*   productUpdate: (req, res) => {
+    console.log('Estamos en esta instancia')
+    console.log(req.body)
+    console.log(req.params.id)
     db.Products.update({
       name: req.body.name,
       price: req.body.price,
@@ -109,7 +112,60 @@ module.exports = {
       .then((producto)=>{
         res.redirect('/products/list')
       })
+  }, */
+
+  productUpdate: (req, res) => {
+    console.log('Entramos al controlador')
+    let errors = validationResult(req);
+    if (errors.errors.length > 0) {
+      db.Categories.findAll()
+        .then((categories)=>{
+          res.render(path.join(__dirname, "../views/products/productCreate"), {categories, errors: errors.mapped(), oldData: req.body})
+        })
+    }else{
+      if(req.file){
+        db.Products.update({
+          product: req.body.name,
+          description: req.body.description,
+          price: req.body.price,
+          discount: req.body.discount,
+          stock: req.body.stock,
+          order: req.body.order,
+          image: req.file.originalname,
+          category_id: req.body.category
+        },{
+          where: {
+            id: req.params.id
+          }})
+          .then((producto)=>{
+            res.redirect('/products/list')
+          })
+      }else{
+        db.Products.update({
+          product: req.body.name,
+          description: req.body.description,
+          price: req.body.price,
+          discount: req.body.discount,
+          stock: req.body.stock,
+          order: req.body.order,
+          category_id: req.body.category
+        },{
+          where: {
+            id: req.params.id
+          }})
+          .then((producto)=>{
+            res.redirect('/products/list')
+          })
+      }
+
+      }
   },
+
+
+
+
+
+
 
   //Eliminar producto
   productDelete: (req, res) => {

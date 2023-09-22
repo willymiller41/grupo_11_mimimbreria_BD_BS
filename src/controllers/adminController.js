@@ -59,6 +59,18 @@ module.exports = {
       })
   },
 
+    //Eliminar usuario
+    userDelete: (req, res) => {
+      db.Users.destroy({
+        where: {
+          id: req.params.id
+        }
+      })
+        .then((user)=>{
+          res.redirect('/admin/adminUsers')
+        })
+    },
+
   listCategory: (req, res) => {
     db.Products.findAll(
         {include: ['categories'],
@@ -209,16 +221,15 @@ module.exports = {
   },
 
   //Eliminar un comentario
-    //Eliminar producto
-    commentsDelete: (req, res) => {
-      db.Comments.destroy({
-        where: {
-          id: req.params.id
-        }
+  commentsDelete: (req, res) => {
+    db.Comments.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+      .then(()=>{
+        res.redirect('/admin/adminComments')
       })
-        .then(()=>{
-          res.redirect('/admin/adminComments')
-        })
-    },
+  },
 
 }

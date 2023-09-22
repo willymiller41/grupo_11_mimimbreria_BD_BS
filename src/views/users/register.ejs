@@ -16,7 +16,7 @@
                     <% } %>
                     <h5 id="name-error" class="validations-errors"></h5>
                     <div class="input-group">
-                        <span class="input-group-text">Nombre: </span>
+                        <span class="input-group-text">* Nombre: </span>
                         <input type="text" aria-label="name" class="form-control" name="name" id="name">
                     </div>
                     <% if(locals.errors && errors.surname){ %>
@@ -24,7 +24,7 @@
                     <% } %>
                     <h5 id="surname-error" class="validations-errors"></h5>
                     <div class="input-group">
-                        <span class="input-group-text">Apellido: </span>
+                        <span class="input-group-text">* Apellido: </span>
                         <input type="text" aria-label="surname" class="form-control" name="surname" id="surname">
                     </div>
                     <% if(locals.errors && errors.email){ %>
@@ -34,7 +34,7 @@
                     <label class="visually-hidden" for="email">Email</label>
                     <div class="input-group">
                         <div class="input-group-text">@</div>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email: ">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="* Email: ">
                     </div>
                     <div class="input-group">
                         <span class="input-group-text">Teléfono: </span>
@@ -45,7 +45,7 @@
                     <% } %>
                     <h5 id="address-error" class="validations-errors"></h5>
                     <div class="input-group">
-                        <span class="input-group-text">Domicilio: </span>
+                        <span class="input-group-text">* Domicilio: </span>
                         <input type="text" aria-label="address" class="form-control" name="address" id="address">
                     </div>
                     <% if(locals.errors && errors.code){ %>
@@ -53,7 +53,7 @@
                     <% } %>
                     <h5 id="code-error" class="validations-errors"></h5>
                     <div class="input-group">
-                        <span class="input-group-text">Código Postal: </span>
+                        <span class="input-group-text">* Código Postal: </span>
                         <input type="text" aria-label="code" class="form-control" name="code" id="code">
                     </div>
                     <% if(locals.errors && errors.avatar){ %>
@@ -68,7 +68,7 @@
                     <% } %>
                     <h5 id="password-error" class="validations-errors"></h5>
                     <div class="input-group">
-                        <span class="input-group-text">Contraseña: </span>
+                        <span class="input-group-text">* Contraseña: </span>
                         <input type="password" aria-label="password" class="form-control" name="password" id="password">
                     </div>
                     <% if(locals.errors && errors.password2){ %>
@@ -76,8 +76,11 @@
                     <% } %>
                     <h5 id="password2-error" class="validations-errors"></h5>
                     <div class="input-group">
-                        <span class="input-group-text">Repita su contraseña: </span>
+                        <span class="input-group-text">* Repita su contraseña: </span>
                         <input type="password" aria-label="password2" class="form-control" name="password2" id="password2">
+                    </div>
+                    <div>
+                        <h6>* Campos obligatorios</hs>
                     </div>
                     <div class="row mb-3 text-center">
                         <div class="col-md-6">

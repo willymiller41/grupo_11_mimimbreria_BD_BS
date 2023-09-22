@@ -25,68 +25,46 @@
                         if(locals.userLogged.role_id === 1 || locals.userLogged.role_id === 2) { %>
                             <div class="float-start">
                                 <a href="/products/edit/<%= product.id %>"><i class="fas fa-edit"></i></a>
-                                <!-- Button trigger modal -->
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminación de producto</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                            <h5>¿Está seguro de eliminar el producto?</h5>
-                                            </div>
-                                            <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                            <button type="button" class="btn btn-danger"><a href="/products/delete/<%= product.id %>">Borrar</a></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <a href="/products/delete/<%= product.id %>"><i class="fas fa-trash"></i></a>
                             </div>
                         <% }} %>
                     <div class="product-image-container">
                         <a href="/products/detail/<%= product.id %>"><img src="/img/products/<%= product.image %>" class="card-img-top" alt="<%= product.product %>"></a>                    
                     </div>
                     <div class="card-body">
-                    <p class="card-title"><%= product.product %></p>
+                    <p class="card-title product"><%= product.product %></p>
                     <% if(product.discount > 0) { 
                         const descuento = product.price * product.discount / 100;
                         const precioConDescuento = product.price - descuento
                         %>
                         <div class="row">
-                            <div class="col">
-                                <p class="card-text" style="text-decoration: line-through;">$ <%= toThousand(product.price) %></p>
+                            <div class="col-10">
+                                <p class="col-6 card-text" style="text-decoration: line-through;">$ <%= toThousand(product.price) %></p>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <p class="card-text">$ <%= toThousand(precioConDescuento) %></p>
+                            <div class="col-7">
+                                <p class="card-text price-discount">$ <%= toThousand(precioConDescuento) %></p>
                             </div>
-                            <div class="col">
-                                <p class="card-text"><%= product.discount %> % OFF</p>
+                            <div class="col-5">
+                                <p class="card-text"><%= product.discount %>% OFF</p>
                             </div>
                         </div>
                     <% }else { %>
                         <div class="row">
-                            <div class="col">
-                                <p class="card-text">$ <%= toThousand(product.price) %></p>
+                                <div class="col-8">
+                                    <div class="row">
+                                        <h6 class="col-1 card-text">$ </h6>
+                                        <p class="col-6 card-text price"><%= toThousand(product.price) %></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                     <% } %>
                     </div>
                 </div>
         <% }) %>
     </div>
     <hr>
-    <% if(locals.isLogged){
-        if(locals.userLogged.role_id === 3) { %>
-            <script src="/js/cartAddItems.js"></script>
-    <% }} %>
     <%- include('../partials/footer')  %>
     <%- include('../partials/bs')  %>
 </body>

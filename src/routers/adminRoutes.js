@@ -11,5 +11,6 @@ router.get("/adminCommentsPublish/:id", authMiddleware, adminMiddleware, adminCo
 router.get("/adminCommentsDelete/:id", authMiddleware, adminMiddleware, adminController.commentsDelete);
 router.get("/adminUsersEditRol/:id", authMiddleware, adminMiddleware, adminController.usersEditRol);
 router.post("/adminUsersEditRol/:id", authMiddleware, adminMiddleware, adminController.usersSaveRol);
+router.get("/adminUsersDelete/:id", authMiddleware, adminMiddleware, adminController.userDelete);
 
 module.exports = router;

@@ -15,7 +15,7 @@ function ready() {
         message_empty_cart.innerHTML= 'Su carrito está vacío - <a href="/products/list"><button type="submit" class="btn btn-primary">Agregue productos</button></a>'
     }else{
         console.log('Entré a carrito')
-        cartDisplay(products_in_cart)
+        cartDisplay(products_in_cart) 
     }
 }
 

@@ -16,7 +16,7 @@
                     <% } %>
                     <h5 id="name-error" class="validations-errors"></h5>
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Nombre del producto:</span>
+                        <span class="input-group-text">* Nombre del producto:</span>
                         <input type="text" class="form-control" id="name" aria-label="name" aria-describedby="name" name="name" value="<%= locals.oldData ? oldData.name : null  %>">
                     </div>
                     <% if(locals.errors && errors.description) { %>
@@ -24,7 +24,7 @@
                     <% } %>
                     <h5 id="description-error" class="validations-errors"></h5>
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Descripción: </span>
+                        <span class="input-group-text">* Descripción: </span>
                         <textarea class="form-control" aria-label="description" name="description" id="description"><%= locals.oldData ? oldData.description : null  %></textarea>
                     </div>
                     <% if(locals.errors && errors.image) { %>
@@ -32,7 +32,7 @@
                     <% } %>
                     <h5 id="image-error" class="validations-errors"></h5>
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="image">Ingrese la imagen</label>
+                        <label class="input-group-text" for="image">* Ingrese la imagen</label>
                         <input type="file" class="form-control" id="image" name="image">
                     </div>
                     <% if(locals.errors && errors.price) { %>
@@ -40,7 +40,7 @@
                     <% } %>
                     <h5 id="price-error" class="validations-errors"></h5>
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Precio:</span>
+                        <span class="input-group-text">* Precio:</span>
                         <input type="text" class="form-control" id="price" aria-label="Sizing example input" aria-describedby="price" name="price" value="<%= locals.oldData ? oldData.price : null  %>">
                     </div>
                     <% if(locals.errors && errors.category) { %>
@@ -48,7 +48,7 @@
                     <% } %>
                     <h5 id="category-error" class="validations-errors"></h5>
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="category">Categoría: </label>
+                        <label class="input-group-text" for="category">* Categoría: </label>
                         <select class="form-select" id="category" name="category" value="<%= locals.oldData ? oldData.category.categoria : null  %>">
                         <option value="" selected>Elija...</option>
                         <% for (const category of categories){ %>
@@ -68,7 +68,7 @@
                     <% } %>
                     <h5 id="stock-error" class="validations-errors"></h5>
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Stock:</span>
+                        <span class="input-group-text">* Stock:</span>
                         <input type="text" class="form-control" id="stock" aria-label="Sizing example input" aria-describedby="stock" name="stock" value="<%= locals.oldData ? oldData.stock : null  %>">
                     </div>
                     <div class="input-group mb-3">
@@ -79,7 +79,9 @@
                         <option value="0">No</option>
                         </select>
                     </div>
-
+                    <div>
+                        <h6>* Campos obligatorios</hs>
+                    </div>
                     <div class="row mb-3 text-center">
                         <div class="col-md-6">
                             <button type="submit" class="btn btn-primary">Guardar</button>

@@ -15,28 +15,7 @@
                         <div class="float-start">
                             <a href="/products/create"><i class="fas fa-plus-square"></i></a>
                             <a href="/products/edit/<%= product.id %>"><i class="fas fa-edit"></i></a>
-                            <!-- Button trigger modal -->
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminación de producto</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                        <h5>¿Está seguro de eliminar el producto?</h5>
-                                        </div>
-                                        <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-danger"><a href="/products/delete/<%= product.id %>">Borrar</a></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <a href="/products/delete/<%= product.id %>"><i class="fas fa-trash"></i></a>
                         </div>
                     <% }} %>
                 <div class="row g-0">
@@ -60,7 +39,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-1"><h4 class="productos-text">$</h4></div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <h4 class="productos-text price-discount"><%= toThousand(precioConDescuento) %></h4>
                                 </div>
                                 <div class="col">
