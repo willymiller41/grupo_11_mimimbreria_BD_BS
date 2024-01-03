@@ -9,7 +9,6 @@ module.exports = (req,res,next) =>{
         res.locals.userLogged = req.session.userLogged;
         return next();
     }else if(req.cookies.email){
-        console.log('Cookie '+ req.cookies.email);
         Users.findOne({
             where: {
                email: req.cookies.email

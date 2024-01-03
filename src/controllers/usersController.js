@@ -21,9 +21,9 @@ module.exports = {
        if(users.length > 0){
         try {
           let imageFile = req.file.filename
-          console.log(imageFile)
+          //console.log(imageFile)
           fs.unlinkSync(path.join(__dirname, "../../public/img/avatars/")+ imageFile)
-          console.log('Archivo eliminado')
+          //console.log('Archivo eliminado')
         } catch(err) {
           console.error('Error eliminando archivo', err)
         }

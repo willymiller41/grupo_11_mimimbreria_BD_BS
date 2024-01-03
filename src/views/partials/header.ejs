@@ -39,7 +39,6 @@
       </div>
       <div class="usuarios">
         <% if(locals.userLogged) { %>
-            <% console.log(locals.usersLogged) %>
             <a href="/users/profile"><img class="avatar-logged" src="/img/avatars/<%= locals.userLogged.avatar %>" alt=""></i></a>
         <% } else{ %>
             <a href="/users/login"><i class="fas fa-user"></i></a>
